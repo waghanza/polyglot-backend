@@ -1,0 +1,55 @@
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "drivers" DISABLE TRIGGER ALL;ALTER TABLE "bookings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34m            SELECT schemaname || '.' || tablename
+            FROM pg_tables
+            WHERE
+              tablename !~ '_prt_' AND
+              tablename <> 'schema_migrations'
+  AND tablename <> 'ar_internal_metadata'
+ AND
+              schemaname = ANY (current_schemas(false))
+[0m
+  [1m[35m (0.4ms)[0m  [1m[34mselect table_name from information_schema.views where table_schema = 'courier_test'[0m
+  [1m[35m (3.2ms)[0m  [1m[31mDELETE FROM "drivers" WHERE 1=1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDELETE FROM "bookings" WHERE 1=1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "drivers" ENABLE TRIGGER ALL;ALTER TABLE "bookings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mDriver Create (0.5ms)[0m  [1m[32mINSERT INTO "drivers" ("name", "lat", "long") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "khaled"], ["lat", 48.880056829526], ["long", 2.331498810764177]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mDriver Create (0.2ms)[0m  [1m[32mINSERT INTO "drivers" ("name", "lat", "long") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "jina"], ["lat", 45.77569333192761], ["long", 4.8340497225431]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/drivers?from=1+Rue+de+Paradis%2C+75010+Paris&to=6+Rue+Blanche%2C+75009+Paris" for 127.0.0.1 at 2024-01-22 12:24:08 +0100
+Processing by DriversController#index as JSON
+  Parameters: {"from"=>"1 Rue de Paradis, 75010 Paris", "to"=>"6 Rue Blanche, 75009 Paris", "driver"=>{}}
+[31mUnpermitted parameter: :driver. Context: { controller: DriversController, action: index, request: #<ActionDispatch::Request:0x00007fd247ccae68>, params: {"from"=>"1 Rue de Paradis, 75010 Paris", "to"=>"6 Rue Blanche, 75009 Paris", "controller"=>"drivers", "action"=>"index", "driver"=>{}} }[0m
+  [1m[36mDriver Load (0.3ms)[0m  [1m[34mSELECT "drivers".* FROM "drivers"[0m
+Completed 200 OK in 10ms (Views: 1.3ms | ActiveRecord: 0.3ms | Allocations: 8366)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mDriver Create (0.3ms)[0m  [1m[32mINSERT INTO "drivers" ("name", "lat", "long") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "MyString"], ["lat", 1.5], ["long", 1.5]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/drivers/f4ca0cad-ebd3-49a5-80ec-f06968b35ee2" for 127.0.0.1 at 2024-01-22 12:24:08 +0100
+Processing by DriversController#show as JSON
+  Parameters: {"id"=>"f4ca0cad-ebd3-49a5-80ec-f06968b35ee2", "driver"=>{}}
+[31mUnpermitted parameter: :driver. Context: { controller: DriversController, action: show, request: #<ActionDispatch::Request:0x00007fd2477915f0>, params: {"controller"=>"drivers", "action"=>"show", "id"=>"f4ca0cad-ebd3-49a5-80ec-f06968b35ee2", "driver"=>{}} }[0m
+  [1m[36mDriver Load (0.1ms)[0m  [1m[34mSELECT "drivers".* FROM "drivers" WHERE "drivers"."id" = $1 LIMIT $2[0m  [["id", "f4ca0cad-ebd3-49a5-80ec-f06968b35ee2"], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 1551)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBooking Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "bookings"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mDriver Create (0.3ms)[0m  [1m[32mINSERT INTO "drivers" ("name", "lat", "long") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "MyString"], ["lat", 1.5], ["long", 1.5]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/drivers/f6d6f068-f563-4e51-b9ff-7b2d710a1f24/book" for 127.0.0.1 at 2024-01-22 12:24:08 +0100
+Processing by BookingController#create as JSON
+  Parameters: {"from"=>"1 Rue de Paradis, 75010 Paris", "to"=>"6 Rue Blanche, 75009 Paris", "at"=>"2024-05-20T08:30:00+02:00", "driver_id"=>"f6d6f068-f563-4e51-b9ff-7b2d710a1f24", "booking"=>{"from"=>"1 Rue de Paradis, 75010 Paris", "to"=>"6 Rue Blanche, 75009 Paris", "at"=>"2024-05-20T08:30:00+02:00"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 329)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
