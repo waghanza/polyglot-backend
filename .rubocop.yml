@@ -1,0 +1,28 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
+Style/FrozenStringLiteralComment: # TODO rubocop bug ???
+  Enabled: false
+
+Layout/LineLength:
+  Max: 150
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Enabled: false
